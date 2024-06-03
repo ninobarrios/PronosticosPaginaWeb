@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/PronosticosPaginaWeb/static/css/main.9777faf6.css",
+    "main.js": "/PronosticosPaginaWeb/static/js/main.007cf163.js",
+    "static/js/453.419a5d54.chunk.js": "/PronosticosPaginaWeb/static/js/453.419a5d54.chunk.js",
+    "static/media/fondo7.jpg": "/PronosticosPaginaWeb/static/media/fondo7.ebcf17b513cbfbe0e341.jpg",
+    "static/media/fotoportada.JPG": "/PronosticosPaginaWeb/static/media/fotoportada.90d7c07e7959758e362a.JPG",
+    "static/media/logoprincipal.png": "/PronosticosPaginaWeb/static/media/logoprincipal.324dc2dc0bbc6d8d0a3e.png",
+    "index.html": "/PronosticosPaginaWeb/index.html",
+    "main.9777faf6.css.map": "/PronosticosPaginaWeb/static/css/main.9777faf6.css.map",
+    "main.007cf163.js.map": "/PronosticosPaginaWeb/static/js/main.007cf163.js.map",
+    "453.419a5d54.chunk.js.map": "/PronosticosPaginaWeb/static/js/453.419a5d54.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9777faf6.css",
+    "static/js/main.007cf163.js"
+  ]
+}
