@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/PronosticosPaginaWeb/static/css/main.9777faf6.css",
-    "main.js": "/PronosticosPaginaWeb/static/js/main.8cb2b7b9.js",
-    "static/js/453.419a5d54.chunk.js": "/PronosticosPaginaWeb/static/js/453.419a5d54.chunk.js",
-    "static/media/fondo7.jpg": "/PronosticosPaginaWeb/static/media/fondo7.ebcf17b513cbfbe0e341.jpg",
-    "static/media/fotoportada.JPG": "/PronosticosPaginaWeb/static/media/fotoportada.90d7c07e7959758e362a.JPG",
-    "static/media/logoprincipal.png": "/PronosticosPaginaWeb/static/media/logoprincipal.324dc2dc0bbc6d8d0a3e.png",
-    "index.html": "/PronosticosPaginaWeb/index.html",
-    "main.9777faf6.css.map": "/PronosticosPaginaWeb/static/css/main.9777faf6.css.map",
-    "main.8cb2b7b9.js.map": "/PronosticosPaginaWeb/static/js/main.8cb2b7b9.js.map",
-    "453.419a5d54.chunk.js.map": "/PronosticosPaginaWeb/static/js/453.419a5d54.chunk.js.map"
+    "main.css": "/PronosticosIABetBook/static/css/main.dcc047a5.css",
+    "main.js": "/PronosticosIABetBook/static/js/main.82ea23f7.js",
+    "static/js/453.419a5d54.chunk.js": "/PronosticosIABetBook/static/js/453.419a5d54.chunk.js",
+    "static/media/fondo7.jpg": "/PronosticosIABetBook/static/media/fondo7.ebcf17b513cbfbe0e341.jpg",
+    "static/media/fotoportada.JPG": "/PronosticosIABetBook/static/media/fotoportada.90d7c07e7959758e362a.JPG",
+    "static/media/logoprincipal.png": "/PronosticosIABetBook/static/media/logoprincipal.324dc2dc0bbc6d8d0a3e.png",
+    "index.html": "/PronosticosIABetBook/index.html",
+    "main.dcc047a5.css.map": "/PronosticosIABetBook/static/css/main.dcc047a5.css.map",
+    "main.82ea23f7.js.map": "/PronosticosIABetBook/static/js/main.82ea23f7.js.map",
+    "453.419a5d54.chunk.js.map": "/PronosticosIABetBook/static/js/453.419a5d54.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9777faf6.css",
-    "static/js/main.8cb2b7b9.js"
+    "static/css/main.dcc047a5.css",
+    "static/js/main.82ea23f7.js"
   ]
 }
