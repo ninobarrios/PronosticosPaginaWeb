@@ -1,22 +1,27 @@
+// Importa las dependencias necesarias
 const express = require("express");
 const mysql = require("mysql2");
 const cors = require("cors");
 
+// Configura el puerto del servidor
 const PORT = process.env.PORT || 3001;
+
+// Crea una instancia de la aplicación Express
 const app = express();
 
 // Middleware para habilitar CORS
 app.use(cors());
 
-// Configuración de la conexión a la base de datos usando variables de entorno
+// Configuración de la conexión a la base de datos
 const connection = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
+    database: process.env.DB_DATABASE
 });
 
-// Verifica la conexión
+
+// Verifica la conexión a la base de datos
 connection.connect(err => {
     if (err) {
         console.error('Error connecting to database:', err);
@@ -25,9 +30,25 @@ connection.connect(err => {
     console.log('Connected to database');
 });
 
+// Ruta para probar la conexión a la base de datos
+app.get("/test-db-connection", (req, res) => {
+    // Realiza una consulta simple a la base de datos
+    connection.query("SELECT 1 + 1 AS result", (err, results) => {
+        if (err) {
+            console.error('Error querying database:', err);
+            res.status(500).json({ error: 'Internal Server Error' });
+            return;
+        }
+        // Devuelve el resultado de la consulta
+        res.json({ result: results[0].result });
+    });
+});
+
+// Inicia el servidor
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
 
 app.get("/pronosticos", (req, res) => {
     connection.query("SELECT local, goles_local, goles_visita, visita, fecha, pronostico, resultado FROM pronosticos WHERE fecha < CURRENT_DATE() AND goles_local IS NOT NULL AND goles_visita IS NOT NULL ORDER BY fecha DESC;", (err, results) => {
