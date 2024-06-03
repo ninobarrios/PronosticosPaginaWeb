@@ -1,18 +1,20 @@
-// Importa las dependencias necesarias
+require('dotenv').config(); // Carga las variables de entorno desde el archivo .env
+
 const express = require("express");
 const mysql = require("mysql2");
 const cors = require("cors");
 
-// Configura el puerto del servidor
 const PORT = process.env.PORT || 3001;
-
-// Crea una instancia de la aplicación Express
 const app = express();
 
-// Middleware para habilitar CORS
 app.use(cors());
 
-// Configuración de la conexión a la base de datos
+app.use(cors({
+    origin: 'https://ninobarrios.github.io/PronosticosIABetBook/' // Reemplaza 'http://example.com' con el dominio de tu aplicación en el celular
+  }));
+
+
+
 const connection = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -20,15 +22,16 @@ const connection = mysql.createConnection({
     database: process.env.DB_DATABASE
 });
 
-
-// Verifica la conexión a la base de datos
-connection.connect(err => {
+connection.connect((err) => {
     if (err) {
         console.error('Error connecting to database:', err);
         return;
     }
     console.log('Connected to database');
 });
+
+// Ahora puedes utilizar 'connection' para realizar consultas a la base de datos
+
 
 // Ruta para probar la conexión a la base de datos
 app.get("/test-db-connection", (req, res) => {
