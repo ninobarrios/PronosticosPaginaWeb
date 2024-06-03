@@ -5,16 +5,16 @@ const cors = require("cors");
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-// Configuración de la conexión a la base de datos
-const connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "paginawebpronosticosdeportivos"
-});
-
 // Middleware para habilitar CORS
 app.use(cors());
+
+// Configuración de la conexión a la base de datos usando variables de entorno
+const connection = mysql.createConnection({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
+});
 
 // Verifica la conexión
 connection.connect(err => {
@@ -24,11 +24,10 @@ connection.connect(err => {
     }
     console.log('Connected to database');
 });
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
-
-
 
 app.get("/pronosticos", (req, res) => {
     connection.query("SELECT local, goles_local, goles_visita, visita, fecha, pronostico, resultado FROM pronosticos WHERE fecha < CURRENT_DATE() AND goles_local IS NOT NULL AND goles_visita IS NOT NULL ORDER BY fecha DESC;", (err, results) => {
