@@ -10,17 +10,14 @@ const app = express();
 app.use(cors());
 
 app.use(cors({
-    origin: 'https://ninobarrios.github.io/PronosticosIABetBook/' // Reemplaza 'http://example.com' con el dominio de tu aplicación en el celular
   }));
 
 
 
   const connection = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
-    connectTimeout: 100000, // 10 segundos (o el tiempo que consideres necesario)
+    host: 'localhost',
+    user: 'root',
+    database: 'paginawebpronosticosdeportivos',
 });
 
 connection.connect((err) => {
@@ -210,8 +207,12 @@ app.get("/calculostake/:stake", (req, res) => {
 });
 
 
-app.get("/combinadas", (req, res) => {
-    connection.query("SELECT `local`, `visita`, `fecha`,  `cuota`, `combinacion`,`resultados` FROM `combinadas` ORDER BY `fecha` DESC, `combinacion` ASC;",
+
+
+
+
+app.get("/masdetres", (req, res) => {
+    connection.query("SELECT `local`, `visita`, `fecha` FROM `masdetres` ORDER BY fecha DESC;    ",
         (err, results) => {
             if (err) {
                 console.error('Error querying database:', err);
@@ -225,22 +226,3 @@ app.get("/combinadas", (req, res) => {
             res.json(results);
         });
 });
-
-
-
-app.get("/progresocombinadas", (req, res) => {
-    connection.query("SELECT fecha, COUNT(DISTINCT combinacion) AS cantidad_combinaciones, ROUND(SUM(progreso_ganancia), 2) AS suma_progreso_ganancia, ROUND(SUM(SUM(progreso_ganancia)) OVER (ORDER BY fecha), 2) AS suma_acumulada_progreso_ganancia FROM ( SELECT fecha, combinacion, CASE WHEN SUM(CASE WHEN resultados = 1 THEN 1 ELSE 0 END) = COUNT(*) THEN EXP(SUM(LOG(cuota)))-1 ELSE (COUNT(DISTINCT combinacion)) * -1 END AS progreso_ganancia FROM combinadas GROUP BY fecha, combinacion ) AS subconsulta WHERE fecha < CURRENT_DATE GROUP BY fecha;",
-        (err, results) => {
-            if (err) {
-                console.error('Error querying database:', err);
-                res.status(500).json({ error: 'Internal Server Error' });
-                return;
-            }
-            if (results.length === 0) {
-                res.status(404).json({ message: 'No hay datos disponibles' });
-                return;
-            }
-            res.json(results);
-        });
-});
-
