@@ -15,9 +15,10 @@ app.use(cors({
 
 
   const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    database: 'paginawebpronosticosdeportivos',
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
 });
 
 connection.connect((err) => {
@@ -83,7 +84,7 @@ app.get("/pronosticosactual", (req, res) => {
 
 
 app.get("/rendimiento", (req, res) => {
-    connection.query("SELECT fecha, COUNT(resultado) AS total_resultados, SUM(resultado) AS suma_resultados, ROUND((SUM(resultado) * 100) / COUNT(resultado), 1) AS porcentaje_resultado FROM pronosticos WHERE fecha < CURDATE() GROUP BY fecha ORDER BY fecha DESC;",
+    connection.query("SELECT fecha, COUNT(resultado) AS total_resultados, SUM(resultado) AS suma_resultados, ROUND((SUM(resultado) * 100) / COUNT(resultado), 1) AS porcentaje_resultado FROM pronosticos WHERE fecha < CURDATE() AND goles_visita IS NOT NULL AND goles_local IS NOT NULL GROUP BY fecha HAVING COUNT(resultado) > 0 ORDER BY fecha DESC;",
         (err, results) => {
             if (err) {
                 console.error('Error querying database:', err);
@@ -212,7 +213,7 @@ app.get("/calculostake/:stake", (req, res) => {
 
 
 app.get("/masdetres", (req, res) => {
-    connection.query("SELECT `local`, `visita`, `fecha` FROM `masdetres` ORDER BY fecha DESC;    ",
+    connection.query("SELECT `local`, `visita`, `fecha` FROM `pronosticos` WHERE pronostico='Mas 3,5' ORDER BY fecha DESC;  ",
         (err, results) => {
             if (err) {
                 console.error('Error querying database:', err);
